@@ -61,5 +61,18 @@ public class MyLinkedList <Ttype> {
 		}
 	}
 	
+	public void print(Ttype element) throws Exception {
+		if(isEmpty()) {
+			throw new Exception("Saraksts ir tukss un nav iespējams printēt elementus!");
+		}
+		
+		MyNode<Ttype> currentNode = firstNode;
+		while(currentNode != null) {
+			System.out.print(currentNode.getElement() + " ");
+			currentNode = currentNode.getNextNode();
+		}
+		System.out.println();
+	}
+	
 	
 }
