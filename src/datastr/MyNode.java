@@ -29,7 +29,7 @@ public class MyNode <Ttype> {
 		}
 	}
 	
-	// Nav javeic notNull parbaudes, jo var but gadijumi ka ir null vertibas
+	//nav jāveic not null pārbaudes, jo var būt gadījumi, ka ir null viens vai otrs - ja pēdjeais bloks vai pirmais
 	public void setNextNode(MyNode<Ttype> nextNode) {
 		this.nextNode = nextNode;
 	}
@@ -40,7 +40,7 @@ public class MyNode <Ttype> {
 	
 	
 	// --- BEZARGUMENTU KONSTRUKTORS ----------------------------------------
-	//nav nepieciesams, jo vienmer lietotajam japadod elements
+	//bez argumenta konstruktors nav vajadzīgs, jo vienmēr lietotjam būs jāpadod elements
 	
 	
 	// --- ARGUMENTU KONSTRUKTORS -------------------------------------------
