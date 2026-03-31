@@ -1,34 +1,38 @@
 package datastr;
 
-public class MyLinkedList <Ttype> {
-	// --- MAINIGIE --------------------------------------------------------
+public class MyLinkedList<Ttype> {
+	// --- MAINIGIE -------------------------------------------
 	private MyNode<Ttype> firstNode = null;
 	private MyNode<Ttype> lastNode = null;
 	private int howManyElements = 0;
+
+	// --- SETTERI ---------------------------------------------
+	//set funkciju netaisām, jo lietotajs nedrīkst 
+	//mainīt howManyelements vērtību patstāvīgi
 	
-	
-	// --- GETTERI ---------------------------------------------------------
+	// --- GETTERI ---------------------------------------------
 	public int getHowManyElements() {
 		return howManyElements;
 	}
 	
+	//firstNode un lastNode netaisām ne set ne get, 
+	//jo neļaujam lietotajam pieķļūt vai mainīt blokus
+
 	
-	// --- SETTERI ----------------------------------------------------------
-	//nevajag, jo lietotajs nevar pats mainit elementu skaitu
+	// --- BEZARGUMENTA KONSTRUKTORS -----------------------------
+	//bezargumenta konstruktors būs no Object klases,
+	//bet argumenta nevajag taisīt
 	
 	
-	// --- BEZARGUMENTU KONSTRUKTORS ----------------------------------------
-	//nevajag, jo bezargumentu kontruktors nak no object klases
-	
-	
-	// --- CITAS FUNKCIJAS --------------------------------------------------
+	// --- CITAS FUNKCIJAS ---------------------------------------
 	public boolean isEmpty() {
 		return (howManyElements == 0);
 	}
 	
+	
 	public boolean isFull() {
 		try {
-			new MyNode<Character>('A'); //Meginu RAM atmina rezervet vietu
+			new MyNode<Character>('A');//mēginu RAM atmiņā rezervēt vietu
 			return false;
 		}
 		catch (OutOfMemoryError e) {
@@ -39,20 +43,20 @@ public class MyLinkedList <Ttype> {
 	
 	public void add(Ttype element) throws Exception {
 		if(isFull()) {
-			throw new Exception("Saraksts ir pilns un nav iespējams pievienot elementu!");
+			throw new Exception("Saraksts ir pilns un nav iespējams pievienot elementu");
 		}
 		if(element == null) {
-			throw new Exception("Pievienotais elements nav norādīts!");
+			throw new Exception("Padotais elements nav norādīts");
 		}
-		
-		//ja bus pievienots pirmais bloks
-		if(isEmpty()) {
+		//TODO var optimizēt kodu, izvelkot no if-else vienādas koda rindiņas
+		//ja būs pievienots pirmais bloks
+		if(isEmpty()){
 			MyNode<Ttype> newNode = new MyNode<Ttype>(element);
 			lastNode = newNode;
-			firstNode = newNode;
+			firstNode =  newNode;
 			howManyElements++;
 		}
-		else { //ja jau ir izveidots viens bloks ieks saraksta
+		else { //ja jau ir vismaz viens bloks iekš saraksta
 			MyNode<Ttype> newNode = new MyNode<Ttype>(element);
 			lastNode.setNextNode(newNode);
 			newNode.setPreviousNode(lastNode);
@@ -61,18 +65,46 @@ public class MyLinkedList <Ttype> {
 		}
 	}
 	
-	//TODO
-	//izveidot add funkciju, kura padod elementu un pozziciju kura ielikt
-	//veikt nepieciesamas parbaudes
-	//ja velas pievienot 0 pozicija
-	//ja velas pievienot beigas
-	//ja velas pievienot pa vidu
 	
-	public void print() throws Exception {
-		if(isEmpty()) {
-			throw new Exception("Saraksts ir tukss un nav iespējams printēt elementus!");
+	public void add(Ttype element, int position) throws Exception{
+		if(isFull()) {
+			throw new Exception("Saraksts ir pilns un nav iespējams pievienot elementu");
+		}
+		if(element == null) {
+			throw new Exception("Padotais elements nav norādīts");
+		}
+		if(position < 0) {
+			throw new Exception("Pozīcija var būt tikai pozitīva");
+		}
+		if(position > howManyElements) {
+			throw new Exception("Pozīcija nevar b ūt lielāka par esošo elementu skaitu");
 		}
 		
+		
+		//ja velas pievienot 0 pozīcijā
+		if(position == 0){
+			MyNode<Ttype> newNode = new MyNode<Ttype>(element);
+			newNode.setNextNode(firstNode);
+			firstNode.setPreviousNode(newNode);	
+			firstNode = newNode;
+			howManyElements++;
+		}
+		//ja vēlas pievienot beigās
+		else if(position == howManyElements) {
+			add(element);
+		}
+		//TODO ja vēlas pievienot pa vidu
+		else
+		{
+			
+		}
+	}
+
+	
+	public void print() throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Sarakstā nav elementu, līdz ar to neko nevar izprintēt");
+		}
 		MyNode<Ttype> currentNode = firstNode;
 		while(currentNode != null) {
 			System.out.print(currentNode.getElement() + " ");
@@ -80,6 +112,4 @@ public class MyLinkedList <Ttype> {
 		}
 		System.out.println();
 	}
-	
-	
 }
