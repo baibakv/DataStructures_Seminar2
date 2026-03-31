@@ -61,7 +61,14 @@ public class MyLinkedList <Ttype> {
 		}
 	}
 	
-	public void print(Ttype element) throws Exception {
+	//TODO
+	//izveidot add funkciju, kura padod elementu un pozziciju kura ielikt
+	//veikt nepieciesamas parbaudes
+	//ja velas pievienot 0 pozicija
+	//ja velas pievienot beigas
+	//ja velas pievienot pa vidu
+	
+	public void print() throws Exception {
 		if(isEmpty()) {
 			throw new Exception("Saraksts ir tukss un nav iespējams printēt elementus!");
 		}
